@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bph5ne05jsymn"]
 
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_4v7np"]
 [ext_resource type="Texture2D" uid="uid://ryuh4gk6r5qb" path="res://gfx/Backgrounds/black.png" id="1_csg4a"]
 [ext_resource type="PackedScene" uid="uid://dk2q578xyiuxu" path="res://scenes/player.tscn" id="2_7ig31"]
-[ext_resource type="PackedScene" uid="uid://ch4qmufa5wfv0" path="res://scenes/meteorGrayMed.tscn" id="3_5sk2h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sqyg5"]
 size = Vector2(1, 770)
@@ -11,6 +11,7 @@ size = Vector2(1, 770)
 size = Vector2(1305, 2)
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_4v7np")
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(641.5, 361.5)
@@ -19,9 +20,6 @@ texture = ExtResource("1_csg4a")
 
 [node name="Player" parent="." instance=ExtResource("2_7ig31")]
 position = Vector2(532, 317)
-
-[node name="Meteor" parent="." instance=ExtResource("3_5sk2h")]
-position = Vector2(789, 166)
 
 [node name="Borders" type="Node2D" parent="."]
 
@@ -42,3 +40,10 @@ shape = SubResource("RectangleShape2D_bprra")
 [node name="BottomBorder" type="CollisionShape2D" parent="Borders/StaticBody2D"]
 position = Vector2(642.5, 721)
 shape = SubResource("RectangleShape2D_bprra")
+
+[node name="MeteorTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Meteors" type="Node2D" parent="."]
+
+[connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
