@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 @export var speed := 500
 
 # Called when the node enters the scene tree for the first time.
@@ -10,4 +10,5 @@ func _ready():
 func _process(delta):
 	#print(str(Engine.get_frames_per_second()))
 	var direction = Input.get_vector("left", "right", "up", "down")
-	position += direction * speed * delta
+	velocity = direction * speed
+	move_and_slide()
